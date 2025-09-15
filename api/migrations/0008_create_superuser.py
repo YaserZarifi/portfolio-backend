@@ -1,7 +1,7 @@
-
 import os
 from django.db import migrations
 from django.contrib.auth import get_user_model
+from django.utils import timezone
 
 def create_superuser(apps, schema_editor):
     User = get_user_model()
@@ -19,7 +19,12 @@ def create_superuser(apps, schema_editor):
         return
 
     print(f"Creating superuser '{username}'...")
-    User.objects.create_superuser(username=username, email=email, password=password)
+    User.objects.create_superuser(
+        username=username,
+        email=email,
+        password=password,
+        last_login=timezone.now()
+    )
     print("Superuser created successfully.")
 
 
