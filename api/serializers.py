@@ -16,10 +16,20 @@ class ProjectSerializer(serializers.ModelSerializer):
         model = Project
         fields = ['id', 'title', 'description', 'long_description', 'image', 'tags', 'live_link', 'repo_link', 'order']
 
+# class SkillSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Skill
+#         fields = ['id', 'name', 'icon_url', 'order', 'category']
+
+
+
 class SkillSerializer(serializers.ModelSerializer):
+    category_display = serializers.CharField(source='get_category_display', read_only=True)
+
     class Meta:
         model = Skill
-        fields = ['id', 'name', 'icon_url', 'order', 'category']
+        fields = ['id', 'name', 'icon_url', 'order', 'category', 'category_display']
+
 
 class ExperienceSerializer(serializers.ModelSerializer):
     class Meta:

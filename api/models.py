@@ -29,6 +29,7 @@ class Skill(models.Model):
         ('FRONTEND', 'Frontend & Design'),
         ('BACKEND', 'Backend & Languages'),
         ('DATA_TOOLS', 'Data Science & Tools'),
+        ('ENGINEERING_TOOLS', 'Engineering Tools'),
     ]
 
     name = models.CharField(max_length=100)
