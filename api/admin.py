@@ -1,9 +1,10 @@
 from django.contrib import admin
-from .models import Tag, Project, Skill, Experience, Education, Certificate, Issuer,Message
+from .models import Tag, Project, Skill, Experience, Education, Certificate, Issuer,Message,Profile
 
 
 admin.site.register(Tag)
 admin.site.register(Issuer)
+admin.site.register(Profile)
 
 
 @admin.register(Project)

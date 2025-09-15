@@ -1,7 +1,7 @@
 
 
 from rest_framework import serializers
-from .models import Tag, Project, Skill, Experience, Education , Certificate, Issuer, Message
+from .models import Tag, Project, Skill, Experience, Education , Certificate, Issuer, Message, Profile
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
@@ -52,3 +52,12 @@ class MessageSerializer(serializers.ModelSerializer):
 
 
 
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['id', 'name', 'title', 'bio', 'resume_file']
+
+
+
+        

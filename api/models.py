@@ -110,3 +110,13 @@ class Message(models.Model):
 
     def __str__(self):
         return f"Message from {self.name} on {self.created_at.strftime('%Y-%m-%d')}"
+
+
+class Profile(models.Model):
+    name = models.CharField(max_length=100)
+    title = models.CharField(max_length=200)
+    bio = models.TextField()
+    resume_file = models.FileField(upload_to='resumes/')
+
+    def __str__(self):
+        return self.name

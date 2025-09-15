@@ -1,6 +1,6 @@
 from rest_framework import viewsets,status
-from .models import Tag, Project, Skill, Experience, Education, Certificate, Message
-from .serializers import TagSerializer, ProjectSerializer, SkillSerializer, ExperienceSerializer, EducationSerializer, CertificateSerializer, MessageSerializer
+from .models import Tag, Project, Skill, Experience, Education, Certificate, Message, Profile
+from .serializers import TagSerializer, ProjectSerializer, SkillSerializer, ExperienceSerializer,ProfileSerializer, EducationSerializer, CertificateSerializer, MessageSerializer
 from django.core.mail import EmailMessage
 from django.conf import settings
 from rest_framework.response import Response
@@ -71,3 +71,15 @@ class MessageViewSet(viewsets.ModelViewSet):
 
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+
+
+class ProfileViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+
+    # This custom action ensures we only ever get one profile
+    def list(self, request, *args, **kwargs):
+        instance = self.get_queryset().first()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
