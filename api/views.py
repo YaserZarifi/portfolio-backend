@@ -1,6 +1,6 @@
 from rest_framework import viewsets,status
-from .models import Tag, Project, Skill, Experience, Education, Certificate, Message, Profile
-from .serializers import TagSerializer, ProjectSerializer, SkillSerializer, ExperienceSerializer,ProfileSerializer, EducationSerializer, CertificateSerializer, MessageSerializer
+from .models import Tag, Project, Skill, Experience, Education, Certificate, Message, Profile,Category
+from .serializers import TagSerializer, ProjectSerializer, SkillSerializer, ExperienceSerializer,ProfileSerializer, EducationSerializer, CertificateSerializer, MessageSerializer,CategorySerializer
 from django.core.mail import EmailMessage
 from django.conf import settings
 from rest_framework.response import Response
@@ -14,9 +14,14 @@ class ProjectViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Project.objects.all().order_by('order')
     serializer_class = ProjectSerializer
 
+class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
 class SkillViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Skill.objects.all().order_by('order')
     serializer_class = SkillSerializer
+
 
 class ExperienceViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Experience.objects.all().order_by('order')

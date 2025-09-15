@@ -23,28 +23,39 @@ class Project(models.Model):
     def __str__(self):
         return self.title
 
-# Model for your skills
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    order = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['order']
+        verbose_name_plural = "Categories"
+
+    def __str__(self):
+        return self.name
+
+
 class Skill(models.Model):
-    CATEGORY_CHOICES = [
-        ('FRONTEND', 'Frontend & Design'),
-        ('BACKEND', 'Backend & Languages'),
-        ('DATA_TOOLS', 'Data Science & Tools'),
-        ('ENGINEERING_TOOLS', 'Engineering Tools'),
-    ]
 
     name = models.CharField(max_length=100)
     icon_url = models.URLField(blank=True)
     order = models.IntegerField(default=0)
-    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='FRONTEND')
 
 
-
+    category = models.ForeignKey(
+        Category,
+        related_name="skills",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
 
     class Meta:
         ordering = ['order']
 
     def __str__(self):
         return self.name
+
 
 class Experience(models.Model):
     role = models.CharField(max_length=200)

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Tag, Project, Skill, Experience, Education, Certificate, Issuer,Message,Profile
+from .models import Tag, Project, Skill, Experience, Education, Certificate, Issuer,Message,Profile,Category
 
 from django import forms
 from django.contrib import admin
@@ -9,6 +9,9 @@ admin.site.register(Tag)
 admin.site.register(Issuer)
 admin.site.register(Profile)
 
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'order')
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):

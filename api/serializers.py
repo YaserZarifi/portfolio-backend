@@ -1,7 +1,7 @@
 
 
 from rest_framework import serializers
-from .models import Tag, Project, Skill, Experience, Education , Certificate, Issuer, Message, Profile
+from .models import Tag, Project, Skill, Experience, Education ,Category , Certificate, Issuer, Message, Profile
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
@@ -23,13 +23,19 @@ class ProjectSerializer(serializers.ModelSerializer):
 
 
 
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['id', 'name', 'order']
+
+
 class SkillSerializer(serializers.ModelSerializer):
-    category_display = serializers.CharField(source='get_category_display', read_only=True)
+    category = CategorySerializer(read_only=True)
+
 
     class Meta:
         model = Skill
-        fields = ['id', 'name', 'icon_url', 'order', 'category', 'category_display']
-
+        fields = ['id', 'name', 'icon_url', 'order', 'category']
 
 class ExperienceSerializer(serializers.ModelSerializer):
     class Meta:

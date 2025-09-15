@@ -2,7 +2,7 @@
 
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import TagViewSet, ProjectViewSet, SkillViewSet, ExperienceViewSet, EducationViewSet, CertificateViewSet, MessageViewSet, ProfileViewSet, FileUploadTestView
+from .views import TagViewSet, ProjectViewSet, SkillViewSet, ExperienceViewSet, EducationViewSet, CategoryViewSet,CertificateViewSet, MessageViewSet, ProfileViewSet, FileUploadTestView
 
 
 router = DefaultRouter()
@@ -14,6 +14,7 @@ router.register(r'educations', EducationViewSet)
 router.register(r'certificates', CertificateViewSet)
 router.register(r'messages', MessageViewSet)
 router.register(r'profile', ProfileViewSet, basename='profile')
+router.register(r'categories', CategoryViewSet)
 
 
 urlpatterns = [
