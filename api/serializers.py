@@ -38,10 +38,11 @@ class IssuerSerializer(serializers.ModelSerializer):
 
 
 class CertificateSerializer(serializers.ModelSerializer):
-    issuer = IssuerSerializer(read_only=True)
+    issuers = IssuerSerializer(many=True ,read_only=True)
+
     class Meta:
         model = Certificate
-        fields = ['id', 'title', 'issuer', 'issue_date', 'credential_id', 'credential_url', 'pdf_file', 'order']
+        fields = ['id', 'title', 'issuers', 'issue_date', 'credential_id', 'credential_url', 'pdf_file', 'order']
 
 
 
@@ -60,4 +61,4 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 
 
-        
+

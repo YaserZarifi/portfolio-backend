@@ -1,6 +1,9 @@
 from django.contrib import admin
 from .models import Tag, Project, Skill, Experience, Education, Certificate, Issuer,Message,Profile
 
+from django import forms
+from django.contrib import admin
+
 
 admin.site.register(Tag)
 admin.site.register(Issuer)
@@ -27,10 +30,34 @@ class EducationAdmin(admin.ModelAdmin):
     list_display = ('degree', 'institution', 'order')
 
 
+# @admin.register(Certificate)
+# class CertificateAdmin(admin.ModelAdmin):
+#     list_display = ('title', 'issuer', 'issue_date', 'order')
+#     search_fields = ('title', 'issuer')
+
+
+
+class CertificateAdminForm(forms.ModelForm):
+    class Meta:
+        model = Certificate
+        fields = "__all__"
+        widgets = {
+            "issuers": admin.widgets.FilteredSelectMultiple("Issuers", is_stacked=False),
+        }
+
 @admin.register(Certificate)
 class CertificateAdmin(admin.ModelAdmin):
-    list_display = ('title', 'issuer', 'issue_date', 'order')
-    search_fields = ('title', 'issuer')
+    form = CertificateAdminForm
+    list_display = ("title", "get_issuers", "issue_date", "order")
+    search_fields = ("title", "issuers__name")
+
+    def get_issuers(self, obj):
+        return ", ".join([issuer.name for issuer in obj.issuers.all()])
+    get_issuers.short_description = "Issuers"
+
+
+
+
 
 
 @admin.register(Message)

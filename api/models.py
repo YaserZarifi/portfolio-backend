@@ -81,20 +81,43 @@ class Issuer(models.Model):
     def __str__(self):
         return self.name
 
+# class Certificate(models.Model):
+#     title = models.CharField(max_length=200)
+#     issuer = models.ManyToManyField(Issuer, on_delete=models.CASCADE, related_name='certificates')
+#     issue_date = models.DateField()
+#     credential_id = models.CharField(max_length=100, blank=True)
+#     credential_url = models.URLField(blank=True)
+#     pdf_file =models.URLField(blank=True, null=True)
+#     order = models.IntegerField(default=0)
+
+#     class Meta:
+#         ordering = ['-issue_date']
+
+#     def __str__(self):
+#         return self.title
+
+
+
 class Certificate(models.Model):
     title = models.CharField(max_length=200)
-    issuer = models.ForeignKey(Issuer, on_delete=models.CASCADE, related_name='certificates')
+    issuers = models.ManyToManyField(Issuer, related_name="certificates")
     issue_date = models.DateField()
     credential_id = models.CharField(max_length=100, blank=True)
     credential_url = models.URLField(blank=True)
-    pdf_file =models.URLField(blank=True, null=True)
+    pdf_file = models.URLField(blank=True, null=True)
     order = models.IntegerField(default=0)
 
     class Meta:
-        ordering = ['-issue_date']
+        ordering = ["-issue_date"]
 
     def __str__(self):
         return self.title
+
+
+
+
+
+
 
 
 
