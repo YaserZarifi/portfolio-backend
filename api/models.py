@@ -11,7 +11,7 @@ class Project(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     long_description = models.TextField(blank=True)
-    image = models.ImageField(upload_to='project_images/', blank=True, null=True)
+    image = models.URLField(blank=False , default="https://placehold.co/800?text=Project+Image&font=roboto")
     tags = models.ManyToManyField(Tag, related_name="projects")
     live_link = models.URLField(blank=True)
     repo_link = models.URLField(blank=True)
@@ -87,7 +87,7 @@ class Certificate(models.Model):
     issue_date = models.DateField()
     credential_id = models.CharField(max_length=100, blank=True)
     credential_url = models.URLField(blank=True)
-    pdf_file = models.FileField(upload_to='certificate_pdfs/', blank=True, null=True)
+    pdf_file =models.URLField(blank=True, null=True)
     order = models.IntegerField(default=0)
 
     class Meta:
@@ -116,7 +116,7 @@ class Profile(models.Model):
     name = models.CharField(max_length=100)
     title = models.CharField(max_length=200)
     bio = models.TextField()
-    resume_file = models.FileField(upload_to='resumes/')
+    resume_file = models.URLField(blank=True)
 
     def __str__(self):
         return self.name

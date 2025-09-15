@@ -83,3 +83,45 @@ class ProfileViewSet(viewsets.ReadOnlyModelViewSet):
         instance = self.get_queryset().first()
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
+
+
+
+from rest_framework.views import APIView
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.response import Response
+from rest_framework import status
+
+
+class FileUploadTestView(APIView):
+    """
+    A simple view to test uploading a resume file.
+    It finds the *first* profile and updates its resume_file.
+    Send a POST request with 'resume_file' as a form-data key.
+    """
+    parser_classes = [MultiPartParser, FormParser]
+
+    def post(self, request, format=None):
+        # Get the file from the request
+        file_obj = request.data.get('resume_file')
+        if not file_obj:
+            return Response({'error': 'File not provided'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Get the first profile object to update
+        profile = Profile.objects.first()
+        if not profile:
+            return Response({'error': 'No profile found in the database'}, status=status.HTTP_404_NOT_FOUND)
+
+        # Assign the file and save
+        try:
+            profile.resume_file = file_obj
+            profile.save()
+
+            # Return the URL from the storage backend
+            file_url = profile.resume_file.url
+            return Response({
+                'message': 'File uploaded successfully!',
+                'file_url': file_url
+            }, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            return Response({'error': f"An error occurred: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

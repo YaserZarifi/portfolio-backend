@@ -2,7 +2,8 @@
 
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import TagViewSet, ProjectViewSet, SkillViewSet, ExperienceViewSet, EducationViewSet, CertificateViewSet, MessageViewSet, ProfileViewSet
+from .views import TagViewSet, ProjectViewSet, SkillViewSet, ExperienceViewSet, EducationViewSet, CertificateViewSet, MessageViewSet, ProfileViewSet, FileUploadTestView
+
 
 router = DefaultRouter()
 router.register(r'tags', TagViewSet)
@@ -17,4 +18,5 @@ router.register(r'profile', ProfileViewSet, basename='profile')
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('upload-test/', FileUploadTestView.as_view(), name='upload-test'),
 ]
