@@ -1,0 +1,28 @@
+Environment
+venv/
+.env
+
+Database
+db.sqlite3
+*.sqlite3
+
+Django media files (user uploads)
+/media/
+
+Python cache
+pycache/
+*.pyc
+*.pyo
+*.pyd
+
+IDE and editor configuration
+.idea/
+.vscode/
+*.swp
+
+Collected static files for production
+/staticfiles/
+
+OS-specific files
+.DS_Store
+Thumbs.db
