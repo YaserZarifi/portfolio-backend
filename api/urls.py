@@ -2,7 +2,7 @@
 
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import TagViewSet, ProjectViewSet, SkillViewSet, ExperienceViewSet, EducationViewSet, CategoryViewSet,CertificateViewSet, MessageViewSet, ProfileViewSet, FileUploadTestView
+from .views import TagViewSet, ProjectViewSet, SkillViewSet, ExperienceViewSet, EducationViewSet, CategoryViewSet,CertificateViewSet, MessageViewSet, ProfileViewSet, HealthCheckView
 
 
 router = DefaultRouter()
@@ -19,5 +19,6 @@ router.register(r'categories', CategoryViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('upload-test/', FileUploadTestView.as_view(), name='upload-test'),
+    path('health-check/', HealthCheckView.as_view(), name='health-check'),
+
 ]

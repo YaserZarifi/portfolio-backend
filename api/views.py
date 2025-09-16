@@ -4,6 +4,14 @@ from .serializers import TagSerializer, ProjectSerializer, SkillSerializer, Expe
 from django.core.mail import EmailMessage
 from django.conf import settings
 from rest_framework.response import Response
+from rest_framework.views import APIView
+
+class HealthCheckView(APIView):
+    """
+    A simple view to check if the server is running.
+    """
+    def get(self, request, format=None):
+        return Response({"status": "ok"}, status=status.HTTP_200_OK)
 
 
 class TagViewSet(viewsets.ReadOnlyModelViewSet):

@@ -34,6 +34,7 @@ SECRET_KEY = 'django-insecure-peg%c*(tjg$*ve#&3!tn^$_+zjzdbm(6)6!1j27prvfs&%#b$^
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
+# DEBUG = config('DEBUG', default=False, cast=bool)
 
 # Allow all hosts for now, Render will manage this
 ALLOWED_HOSTS = ['*']
